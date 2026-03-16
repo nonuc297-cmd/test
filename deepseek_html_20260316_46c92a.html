@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Tandoori Treat Café | Cosmic Black & Maroon</title>
+    <!-- SEO meta -->
+    <meta name="description" content="Tandoori Treat Café: authentic North Indian tandoori dishes with a cosmic vibe. Naan, Paneer Tikka, Chaap, Dal Makhni, Raita. Order via WhatsApp. Located in Delhi NCR.">
+    <meta name="keywords" content="Indian café, Tandoori, North Indian food, Naan, Paneer Tikka, Chaap, Dal Makhni, Raita, Delhi NCR, Gurugram">
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            color: #f0e6dd;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            background-color: #000; /* fallback */
+            position: relative;
+        }
+        /* SPACE VIDEO BACKGROUND */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(30, 5, 10, 0.75) 0%, rgba(0,0,0,0.95) 90%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        /* Black + Maroon refined with glow */
+        :root {
+            --maroon: #c8242e;
+            --maroon-glow: #ff3b4a;
+            --maroon-dark: #8f1720;
+            --black: #030101;
+            --black-soft: #130a0c;
+            --cream-accent: #ecd4bf;
+            --gold: #e6b878;
+            --shadow-3d: 0 20px 30px -10px rgba(255, 40, 60, 0.3), 0 8px 0 0 #5f121b, 0 12px 30px black;
+            --card-3d: 0 15px 25px -8px rgba(255, 0, 30, 0.3), 0 6px 0 0 #54131c, 0 10px 20px black;
+        }
+
+        /* animated gradient + glow for titles */
+        .glow-gradient {
+            background: linear-gradient(145deg, #f0434b, #c91e2c, #ff7b6b, #b51023);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 8s ease infinite, textGlow 3s ease-in-out infinite;
+            text-shadow: 0 0 15px #ff4d5e, 0 0 40px #a5121f;
+        }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px #ff3750, 0 0 30px #9f1d2c; }
+            50% { text-shadow: 0 0 25px #ff6f7e, 0 0 60px #c22734; }
+            100% { text-shadow: 0 0 10px #ff3750, 0 0 30px #9f1d2c; }
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            letter-spacing: -0.01em;
+        }
+
+        /* 3D effect on cards */
+        .menu-item, .review-card, .booking-contact, .about-section, .gallery-grid img, .hero-gallery img {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--card-3d);
+            border: 1px solid #b82a3680;
+            backdrop-filter: blur(1px);
+        }
+        .menu-item:hover, .review-card:hover, .gallery-grid img:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 22px 30px -10px #ff2740, 0 8px 0 0 #71121e, 0 18px 30px black;
+        }
+
+        /* sticky whatsapp 3D */
+        .wa-float {
+            position: fixed;
+            bottom: 28px;
+            right: 24px;
+            background: #25D366;
+            color: black;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            font-size: 36px;
+            box-shadow: 0 12px 0 #0e5e2f, 0 18px 30px rgba(255, 70, 100, 0.6);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.1s linear;
+            text-decoration: none;
+            border: 2px solid #ffc499;
+        }
+        .wa-float:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 0 #0e5e2f, 0 25px 30px black;
+        }
+
+        /* navbar */
+        .navbar {
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(12px);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 3px solid var(--maroon);
+            box-shadow: 0 10px 20px rgba(255, 20, 40, 0.2);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 2rem;
+            background: linear-gradient(45deg, #f0595f, #ffaca3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 25px #ff3b48;
+        }
+        .logo span {
+            font-size: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--gold);
+            display: block;
+            text-shadow: 0 0 10px #b5574a;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-weight: 500;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #ffdac0;
+            font-size: 1.15rem;
+            padding: 8px 0;
+            border-bottom: 3px solid transparent;
+            transition: 0.2s;
+            text-shadow: 0 0 8px #f4797b;
+        }
+        .nav-links a:hover {
+            border-bottom-color: var(--maroon);
+            color: white;
+            transform: scale(1.05);
+            text-shadow: 0 0 20px #ff7a85;
+        }
+
+        /* hero */
+        .hero {
+            padding: 50px 0 70px;
+            background: transparent; /* let video show */
+        }
+        .hero-content h1 {
+            font-size: 3.4rem;
+            line-height: 1.2;
+            background: linear-gradient(145deg, #f05e66, #ff3f4a, #f28482, #b32c36);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 9s ease infinite, textGlow 3s infinite;
+        }
+        .hero-tagline {
+            font-size: 2.2rem;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(145deg, #ecb097, #ffcdb0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px #ff8362;
+            animation: textGlow 3s infinite;
+            margin: 20px 0;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--maroon);
+            color: white;
+            padding: 16px 38px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 12px 0 #4f0e17, 0 10px 30px #ff4255;
+            transition: 0.07s linear;
+            border: 1px solid #ff886b;
+            text-shadow: 0 0 8px black;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--maroon-glow);
+            box-shadow: 0 8px 0 #4b0d15, 0 8px 20px #ff3b4d;
+            color: #ffdad2;
+        }
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 0 #4f0e17, 0 18px 30px #ff2e44;
+        }
+        .hero-gallery {
+            flex: 1 1 300px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .hero-gallery img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 30px;
+            border: 3px solid var(--maroon);
+            box-shadow: 0 20px 30px -5px black, 0 0 30px #ff2a3b;
+        }
+        .hero-gallery img:first-child {
+            grid-column: span 2;
+            height: 210px;
+        }
+
+        /* section titles animated */
+        .section-title {
+            text-align: center;
+            font-size: 3.2rem;
+            margin: 70px 0 40px;
+            background: linear-gradient(145deg, #dd4b54, #ff706b, #d62f3a, #ff938b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 8s ease infinite, textGlow 3s infinite;
+        }
+
+        /* menu */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 30px;
+        }
+        .menu-item {
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 40px 40px 30px 30px;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 25px;
+            border: 1px solid #b52e3f;
+        }
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--maroon);
+        }
+        .menu-item h3 {
+            font-size: 1.9rem;
+            background: linear-gradient(145deg, #f0a29b, #ffb7aa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px #fc6e78;
+        }
+        .menu-item p {
+            color: #f5bc9d;
+            font-weight: 500;
+        }
+
+        /* about */
+        .about-section {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 70px 70px 40px 40px;
+            padding: 60px 40px;
+            margin: 70px 0;
+            border: 2px solid var(--maroon);
+        }
+        .about-section p {
+            font-size: 1.6rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            color: #ffdbca;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin: 50px 0;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 40px;
+            border: 3px solid var(--maroon);
+        }
+
+        /* review section */
+        .review-submit-area {
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(10px);
+            border-radius: 70px;
+            padding: 50px 40px;
+            border: 2px solid var(--maroon);
+            margin: 40px 0 20px;
+        }
+        .stars-input {
+            display: flex;
+            gap: 20px;
+            font-size: 3.8rem;
+            color: #5a313b;
+            cursor: pointer;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .stars-input i {
+            transition: 0.1s;
+            text-shadow: 0 5px 0 #27070c, 0 0 30px #ff4155;
+        }
+        .stars-input i.active, .stars-input i.selected {
+            color: #f5b342;
+            text-shadow: 0 5px 0 #8a6020, 0 0 40px #ffd966;
+            transform: scale(1.1);
+        }
+        #reviewText {
+            width: 100%;
+            padding: 20px 25px;
+            font-size: 1.3rem;
+            background: #1f0b10;
+            border: 3px solid var(--maroon);
+            border-radius: 80px;
+            color: #ffdac0;
+            box-shadow: inset 0 6px 0 #140508, 0 8px 0 #3b0f18;
+        }
+        .btn-submit {
+            background: var(--maroon);
+            border: none;
+            color: white;
+            padding: 18px 50px;
+            font-size: 1.6rem;
+            border-radius: 80px;
+            font-weight: bold;
+            box-shadow: 0 12px 0 #55111e, 0 10px 30px #ff4053;
+            cursor: pointer;
+            margin: 20px 0 30px;
+            border: 1px solid #ffa17a;
+        }
+        .btn-submit:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 0 #55111e, 0 15px 30px #ff4b5d;
+        }
+        .reviews-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin: 50px 0;
+        }
+        .review-card {
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(6px);
+            padding: 32px 26px;
+            border-radius: 50px;
+            max-width: 340px;
+            border: 1px solid #d14757;
+        }
+        .review-card i.fa-star {
+            color: #f5b342;
+            text-shadow: 0 3px 0 #6d441a, 0 0 20px gold;
+        }
+
+        /* booking / contact - with Delhi NCR location and ACTUAL MAP IMAGE */
+        .booking-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 80px;
+            padding: 60px 50px;
+            margin: 70px 0;
+            border: 2px solid var(--maroon);
+        }
+        .info-col h3 {
+            font-size: 2.6rem;
+            background: linear-gradient(145deg, #ee6a73, #ff8787);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 25px #f66470;
+        }
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.5rem;
+            margin: 35px 0;
+            color: #ffcfb0;
+        }
+        .contact-detail i {
+            background: var(--maroon);
+            color: white;
+            border-radius: 60%;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: 0 8px 0 #4e111b, 0 0 30px #ff6068;
+        }
+        .btn-wa-large {
+            background-color: #25D366;
+            color: black;
+            padding: 20px 36px;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 1.6rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            box-shadow: 0 14px 0 #116e32, 0 20px 30px #ff3f57;
+            border: 2px solid #ffdbb5;
+        }
+        .btn-wa-large:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 0 #116e32, 0 25px 30px black;
+        }
+        /* map image styling - replaced placeholder text */
+        .map-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 50px;
+            border: 4px solid var(--maroon);
+            box-shadow: 0 0 30px #ff4255, 0 15px 25px black;
+            margin-top: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+        }
+        .map-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px #ff6a7a, 0 20px 30px black;
+        }
+
+        /* footer */
+        footer {
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            color: #e4af95;
+            padding: 40px 0;
+            margin-top: 80px;
+            border-top: 6px solid var(--maroon);
+            box-shadow: 0 -20px 30px black;
+        }
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+        .social-icons a {
+            color: #e4af95;
+            font-size: 2.5rem;
+            margin: 0 15px;
+            transition: 0.2s;
+            display: inline-block;
+        }
+        .social-icons a:hover {
+            color: var(--maroon-glow);
+            transform: scale(1.2) translateY(-6px);
+            text-shadow: 0 0 30px #ff5665;
+        }
+
+        @media (max-width: 700px) {
+            .hero-content h1 { font-size: 2.7rem; }
+            .section-title { font-size: 2.6rem; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .map-image { height: 180px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- SPACE VIDEO BACKGROUND (slow cosmic voyage) -->
+    <video class="video-background" autoplay muted loop playsinline poster="https://images.pexels.com/photos/2166/earth-planet-space-galaxy.jpg?auto=compress">
+        <source src="https://videos.pexels.com/video-files/854262/854262-sd_640_360_25fps.mp4" type="video/mp4">
+        <!-- fallback slow nebula video from pexels (space) -->
+        <source src="https://videos.pexels.com/video-files/856578/856578-sd_640_360_25fps.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="overlay"></div> <!-- dark gradient overlay -->
+
+    <!-- Sticky WhatsApp -->
+    <a href="https://wa.me/919210383771?text=Hello%20I%20want%20to%20book%20a%20table%20or%20place%20an%20order" class="wa-float" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">Tandoori Treat Café <span>cosmic kitchen</span></div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#menu">Menu</a>
+                <a href="#about">About</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#book">Order</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home">
+        <div class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="glow-gradient">Tandoori Treat Café</h1>
+                    <div class="hero-tagline">🔥 Authentic Tandoori Taste, Fresh From Our Kitchen.</div>
+                    <div class="hero-buttons">
+                        <a href="https://wa.me/919210383771?text=Hello%20I%20want%20to%20order%20food%20or%20book%20a%20table" target="_blank" class="btn"><i class="fab fa-whatsapp"></i> Order / Book</a>
+                        <a href="tel:+919210383771" class="btn btn-outline"><i class="fas fa-phone-alt"></i> Call Now</a>
+                    </div>
+                </div>
+                <div class="hero-gallery">
+                    <img src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Naan">
+                    <img src="https://images.pexels.com/photos/1600724/pexels-photo-1600724.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tandoori platter">
+                    <img src="https://images.pexels.com/photos/6995212/pexels-photo-6995212.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Paneer Tikka">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- MENU -->
+        <section id="menu">
+            <h2 class="section-title">Signature Menu</h2>
+            <div class="menu-grid">
+                <div class="menu-item"><img src="https://images.pexels.com/photos/7394819/pexels-photo-7394819.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Butter Naan"><h3>Butter Naan</h3><p>soft & buttery</p></div>
+                <div class="menu-item"><img src="https://images.pexels.com/photos/6995212/pexels-photo-6995212.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Paneer Tikka"><h3>Paneer Tikka</h3><p>spiced cottage cheese</p></div>
+                <div class="menu-item"><img src="https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Soy Chaap"><h3>Soy Chaap</h3><p>smoky & succulent</p></div>
+                <div class="menu-item"><img src="https://images.pexels.com/photos/9418691/pexels-photo-9418691.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Dal Makhni"><h3>Dal Makhni</h3><p>creamy black lentils</p></div>
+                <div class="menu-item"><img src="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Raita"><h3>Raita</h3><p>mint & cucumber</p></div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="about-section">
+            <h2 class="section-title" style="margin-top: 0;">About Us</h2>
+            <p>At Tandoori Treat Café, we bring the heart of Punjab to your plate. Every dish is crafted in our traditional tandoor using time‑honored recipes. From fluffy Butter Naan to sizzling Paneer Tikka, creamy Dal Makhni, and our signature Soy Chaap — we use only the freshest ingredients and authentic spices. Come taste the warmth of North India.</p>
+        </section>
+
+        <!-- GALLERY -->
+        <h2 class="section-title">Insta‑worthy Gallery</h2>
+        <div class="gallery-grid">
+            <img src="https://images.pexels.com/photos/1435905/pexels-photo-1435905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Naan and bowl">
+            <img src="https://images.pexels.com/photos/12766315/pexels-photo-12766315.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tandoori platter">
+            <img src="https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Chaap sizzler">
+            <img src="https://images.pexels.com/photos/12766309/pexels-photo-12766309.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Dal makhni">
+        </div>
+
+        <!-- REVIEWS (interactive) -->
+        <section id="reviews">
+            <h2 class="section-title">Rate Your Experience</h2>
+            <div class="review-submit-area">
+                <div class="rating-container">
+                    <div class="stars-input" id="starWidget">
+                        <i class="fa-regular fa-star" data-value="1"></i>
+                        <i class="fa-regular fa-star" data-value="2"></i>
+                        <i class="fa-regular fa-star" data-value="3"></i>
+                        <i class="fa-regular fa-star" data-value="4"></i>
+                        <i class="fa-regular fa-star" data-value="5"></i>
+                    </div>
+                    <div class="review-text-input">
+                        <input type="text" id="reviewText" placeholder="Tell us about the food... (optional)" maxlength="120">
+                    </div>
+                    <button class="btn-submit" id="submitReviewBtn"><i class="fas fa-pen"></i> Leave review</button>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 20px;">What our guests say</h2>
+            <div class="reviews-grid" id="reviewFeed">
+                <div class="review-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>“Best dal makhni in town! The naan is so soft. Felt like Delhi.”</p><span class="customer-name">— Priya Mehta</span></div>
+                <div class="review-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>“Ordered Paneer Tikka via WhatsApp. Delicious & hot!”</p><span class="customer-name">— Rohit Sharma</span></div>
+                <div class="review-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><p>“Cozy café, authentic flavours. Raita is refreshing.”</p><span class="customer-name">— Anjali Kapoor</span></div>
+            </div>
+        </section>
+
+        <!-- BOOKING / CONTACT with DELHI NCR location and MAP IMAGE -->
+        <section id="book">
+            <div class="booking-contact">
+                <div class="info-col">
+                    <h3>Let's connect</h3>
+                    <div class="contact-detail"><i class="fas fa-phone-alt"></i> <span><strong>Call:</strong> <a href="tel:+919210383771" style="color: #fcc5a5;">+91 92103 83771</a></span></div>
+                    <div class="contact-detail"><i class="fab fa-whatsapp"></i> <span><strong>WhatsApp:</strong> +91 92103 83771</span></div>
+                    <a href="https://wa.me/919210383771?text=Hello%20I%20want%20to%20book%20a%20table%20or%20place%20an%20order" target="_blank" class="btn-wa-large"><i class="fab fa-whatsapp"></i> Book / Order</a>
+                </div>
+                <div class="info-col">
+                    <h3>Visit us (Delhi NCR)</h3>
+                    <p style="font-size: 1.7rem; color: #f2c7a7;"><i class="fas fa-map-pin" style="color: var(--maroon);"></i> Sector 29, Gurugram, Delhi NCR</p>
+                    <!-- Actual map image of Delhi NCR / Gurugram area (representative) -->
+                    <img src="https://images.pexels.com/photos/460695/pexels-photo-460695.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Map of Delhi NCR - Gurugram Sector 29 area" class="map-image" loading="lazy">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-container">
+            <div>© 2025 Tandoori Treat Café — space edition</div>
+            <div class="social-icons">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- review script -->
+    <script>
+        (function() {
+            const stars = document.querySelectorAll('#starWidget i');
+            let currentRating = 0;
+            function updateStars(rating) {
+                stars.forEach(star => {
+                    const value = parseInt(star.getAttribute('data-value'), 10);
+                    if (value <= rating) {
+                        star.classList.remove('fa-regular');
+                        star.classList.add('fa-solid', 'active', 'selected');
+                    } else {
+                        star.classList.remove('fa-solid', 'active', 'selected');
+                        star.classList.add('fa-regular');
+                    }
+                });
+            }
+            stars.forEach(star => {
+                star.addEventListener('mouseenter', function() {
+                    updateStars(parseInt(this.getAttribute('data-value'), 10));
+                });
+                star.addEventListener('mouseleave', function() {
+                    updateStars(currentRating);
+                });
+                star.addEventListener('click', function() {
+                    currentRating = parseInt(this.getAttribute('data-value'), 10);
+                    updateStars(currentRating);
+                });
+            });
+            document.getElementById('submitReviewBtn').addEventListener('click', function() {
+                const reviewText = document.getElementById('reviewText').value.trim();
+                if (currentRating === 0) {
+                    alert('Please give a star rating (1 to 5)');
+                    return;
+                }
+                const feed = document.getElementById('reviewFeed');
+                const newCard = document.createElement('div');
+                newCard.className = 'review-card';
+                let starHTML = '';
+                for (let i = 1; i <= 5; i++) {
+                    starHTML += (i <= currentRating) ? '<i class="fas fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
+                }
+                const reviewContent = reviewText ? `“${reviewText}”` : '“No comment, but tasty!”';
+                const name = '— Guest ' + Math.floor(Math.random() * 1000);
+                newCard.innerHTML = starHTML + `<p>${reviewContent}</p><span class="customer-name">${name}</span>`;
+                feed.prepend(newCard);
+                currentRating = 0;
+                updateStars(0);
+                document.getElementById('reviewText').value = '';
+            });
+        })();
+    </script>
+</body>
+</html>
